@@ -60,9 +60,10 @@ func displayTask() {
 		fmt.Printf("%v. %v", number, desc)
 		if task.completed == true {
 			fmt.Print(" -Completed\n")
-			return
+		} else {
+			fmt.Print(" -Not completed\n")
 		}
-		fmt.Print(" -Not completed\n")
+
 	}
 }
 
@@ -119,4 +120,30 @@ func deleteTodo() {
 	remove(tasks, conIdx)
 	fmt.Println("Task deleted successfully!")
 	displayTask()
+}
+
+func markAsCompleted() {
+	if len(tasks) == 0 {
+		fmt.Println("No task has been created!, add task!")
+		todoActions()
+		return
+	}
+
+	fmt.Print("Type the task number you want to mark completed: ")
+	reader := bufio.NewReader(os.Stdin)
+	number, _ := userInput(reader)
+
+	conIdx := convToInt(number)
+
+	if conIdx < 0 || conIdx >= len(tasks) {
+		fmt.Println("Invalid task number.")
+		return
+	}
+
+	val := getItemByIndex(conIdx)
+
+	val.completed = true
+
+	displayTask()
+
 }

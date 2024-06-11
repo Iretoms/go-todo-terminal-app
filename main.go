@@ -8,7 +8,8 @@ import (
 
 func todoActions() {
 	fmt.Println("Choose an option below")
-	fmt.Println("type (a to Add Todo, s to show All Todos, u to update a task, d to delete a task, e to Exit): ")
+	fmt.Println("type (a to Add Todo, s to show All Todos, u to update a task, d to delete a task, e to Exit)")
+	fmt.Print("(m to mark a task complete): ")
 	reader := bufio.NewReader(os.Stdin)
 	option, _ := userInput(reader)
 
@@ -29,6 +30,9 @@ func todoActions() {
 	case "d":
 		deleteTodo()
 		todoActions()
+	case "m":
+		markAsCompleted()
+		todoActions()
 	case "e":
 		fmt.Println("Exited successfully! Have a nice day")
 	default:
@@ -37,7 +41,6 @@ func todoActions() {
 	}
 
 }
-
 
 func main() {
 	fmt.Println("Welcome to your Todo List App")
